@@ -1,0 +1,66 @@
+---
+title: "Homework 9"
+author: "Marley McGehee"
+date: "4/02/2026"
+output:  
+  html_document:
+    code_folding: hide
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyr)
+library(Lock5Data)
+library(tidyverse)
+
+```
+
+
+## Percentage
+
+```{r}
+percent_baby <- babynames::babynames %>% 
+               mutate (percentages = round(prop * 100, 1))
+knitr::kable(percent_baby %>%
+                head(n = 6)
+                       )
+```
+^[Question 1 complete]
+
+```{r}
+string_percent_baby <- percent_baby %>%
+               mutate(percent_in_year = str_c(percentages,  " in ",  year))
+knitr::kable(string_percent_baby  %>%
+               head(n = 6) )
+
+
+```
+^[Question 2 complete]
+
+## Mary
+
+```{r}
+mary_babyname <- string_percent_baby %>% 
+               filter(name == "Mary", sex == "F")
+
+knitr::kable( mary_babyname %>%
+               head(n = 6))
+
+```
+
+^[Question 3 complete]
+
+```{r}
+set.seed(1)
+
+random_mary_babyname <- mary_babyname %>% 
+  slice_sample(n = 5) %>%
+  arrange(year)
+
+knitr::kable(random_mary_babyname)
+  
+```
+
+^[Question 4 complete]
