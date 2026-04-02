@@ -31,7 +31,7 @@ knitr::kable(percent_baby %>%
 
 ```{r}
 string_percent_baby <- percent_baby %>%
-               mutate(percent_in_year = str_c(percentages,  " in ",  year))
+               mutate(percent_in_year = str_c(percentages, "%",  " in ",  year))
 knitr::kable(string_percent_baby  %>%
                head(n = 6) )
 
@@ -64,3 +64,27 @@ knitr::kable(random_mary_babyname)
 ```
 
 ^[Question 4 complete]
+
+```{r}
+string_mary <-random_mary_babyname %>%
+    pull(percent_in_year) %>%
+ str_flatten( ", ", last = ", and ") 
+
+string_mary %>% str_view()
+```
+
+^[Question 5 complete]
+
+
+```{r, results = 'asis'}
+
+finalized_template <- 
+  str_glue("Out of all female names, the name Mary represented " ,
+ string_mary, ".")
+
+cat(finalized_template)
+
+```
+
+
+^[Question 6 complete]
